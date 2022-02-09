@@ -20,4 +20,5 @@ class BaseViewSet(GenericViewSet):
         return self.action_serializers.get(self.action, self.serializer_class)
 
     def get_permissions(self):
-        return self.action_permissions.get(self.action, self.permission_classes)
+        permissions = self.action_permissions.get(self.action, self.permission_classes)
+        return (permission() for permission in permissions)
